@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ScriptureHider
 {
@@ -50,11 +51,15 @@ namespace ScriptureHider
     {
         public ScriptureReference Reference { get; set; }
         public Word[] Words { get; set; }
+        public string Explanation { get; set; }
+        public string Context { get; set; }
 
-        public Scripture(ScriptureReference reference, string text)
+        public Scripture(ScriptureReference reference, string text, string explanation, string context)
         {
             Reference = reference;
             Words = text.Split(' ').Select(w => new Word(w)).ToArray();
+            Explanation = explanation;
+            Context = context;
         }
 
         public void HideRandomWords()
@@ -66,36 +71,63 @@ namespace ScriptureHider
 
         public override string ToString()
         {
-            var words = Words.Select(w => w.IsHidden? "_____" : w.Text);
+            var words = Words.Select(w => w.IsHidden ? "_____" : w.Text);
             return $"{Reference}: {string.Join(" ", words)}";
         }
     }
 
     class Program
     {
+        static List<Scripture> scriptureLibrary = new List<Scripture>
+        {
+            new Scripture(
+                new ScriptureReference("John", 3, 16),
+                "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+                "This verse is a central message of Christianity, emphasizing God's love for humanity.",
+                "John 3:1-21"
+            ),
+            new Scripture(
+                new ScriptureReference("Philippians", 4, 13),
+                "I can do all this through him who gives me strength.",
+                "This verse is a declaration of faith and trust in God's power.",
+                "Philippians 4:10-20"
+            ),
+            new Scripture(
+                new ScriptureReference("Psalm", 23, 4),
+                "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff comfort me.",
+                "This verse is a expression of trust in God's presence and guidance.",
+                "Psalm 23:1-6"
+            ),
+            // Add more scriptures to the library here
+        };
+
         static void Main(string[] args)
         {
-            var scripture = new Scripture(
-                new ScriptureReference("John", 3, 16),
-                "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
-            );
-
+            var random = new Random();
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine(scripture.ToString());
-                Console.Write("Press enter to hide words or type 'quit' to exit: ");
-                var input = Console.ReadLine();
-                if (input.ToLower() == "quit")
+                var scriptureIndex = random.Next(scriptureLibrary.Count);
+                var scripture = scriptureLibrary[scriptureIndex];
+
+                while (true)
                 {
-                    break;
-                }
-                scripture.HideRandomWords();
-                if (scripture.Words.All(w => w.IsHidden))
-                {
-                    break;
+                    Console.Clear();
+                    Console.WriteLine(scripture.ToString());
+                    Console.WriteLine($"Explanation: {scripture.Explanation}");
+                    Console.WriteLine($"Context: {scripture.Context}");
+                    Console.Write("Press enter to hide words or type 'quit' to exit: ");
+                    var input = Console.ReadLine();
+                    if (input.ToLower() == "quit")
+                    {
+                        return;
+                    }
+                    scripture.HideRandomWords();
+                    if (scripture.Words.All(w => w.IsHidden))
+                    {
+                        break;
+                    }
                 }
             }
         }
     }
-}
+} 
