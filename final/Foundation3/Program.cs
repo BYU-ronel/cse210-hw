@@ -42,7 +42,7 @@ namespace EventPlanning
 
         public string StandardDetails()
         {
-             return $"{_title}\n{_description}\n{_date.ToShortDateString()} {_time.ToString(@"h\:mm tt")}\n{_address}";
+             return $"{_title}\n{_description}\n{_date.ToShortDateString()} {_time}\n{_address}";
         }
 
         protected DateTime Date { get { return _date; } }
