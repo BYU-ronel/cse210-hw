@@ -124,14 +124,14 @@ namespace EventPlanning
     {
         static void Main(string[] args)
         {
-            Address lectureAddress = new Address("123 Main St", "Anytown", "CA", "12345");
-            Lecture lecture = new Lecture("C# Programming", "Learn C# programming", new DateTime(2023, 3, 15), new TimeSpan(6, 0, 0), lectureAddress, "John Doe", 50);
+            Address lectureAddress = new Address("Tobes St", "Bobon Northern Samar", "PH", "6400");
+            Lecture lecture = new Lecture("C# Programming", "Learn C# programming", new DateTime(2024, 7, 20), new TimeSpan(6, 0, 0), lectureAddress, "John Doe", 50);
 
-            Address receptionAddress = new Address("456 Elm St", "Othertown", "NY", "67890");
-            Reception reception = new Reception("Wedding Reception", "Join us for a wedding reception", new DateTime(2023, 6, 1), new TimeSpan(7, 0, 0), receptionAddress, "rsvp@example.com");
+            Address receptionAddress = new Address("Domsat Rd", "Dvao City", "PH", "8000");
+            Reception reception = new Reception("Wedding Reception", "Join us for a wedding reception", new DateTime(2024, 7, 21), new TimeSpan(7, 0, 0), receptionAddress, "rsvp@example.com");
 
-            Address outdoorAddress = new Address("789 Park Ave", "Parksburg", "FL", "34567");
-            OutdoorGathering outdoor = new OutdoorGathering("Music Festival", "Enjoy live music and food", new DateTime(2023, 9, 22), new TimeSpan(12, 0, 0), outdoorAddress, "Sunny with a high of 75");
+            Address outdoorAddress = new Address("254 Bonifacio St", "Cebu City", "PH", "6000");
+            OutdoorGathering outdoor = new OutdoorGathering("Music Festival", "Enjoy live music and food", new DateTime(2024, 7, 22), new TimeSpan(12, 0, 0), outdoorAddress, "Sunny with a high of 75");
 
             Console.WriteLine("Lecture:");
             Console.WriteLine(lecture.StandardDetails());
